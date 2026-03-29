@@ -1,0 +1,65 @@
+<div class="task-list">
+  <div class="stats-row">
+    <div class="stat-card">
+      <p class="stat-value">{{ tasks.length }}</p>
+      <p class="stat-label">Total Tasks</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-value pending">{{ pendingCount }}</p>
+      <p class="stat-label">Pending</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-value completed">{{ completedCount }}</p>
+      <p class="stat-label">Completed</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-value high">{{ highPriorityCount }}</p>
+      <p class="stat-label">High Priority</p>
+    </div>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="tab" [class.active]="filter === 'all'" (click)="setFilter('all')">All</button>
+    <button class="tab" [class.active]="filter === 'Pending'" (click)="setFilter('Pending')">Pending</button>
+    <button class="tab" [class.active]="filter === 'Completed'" (click)="setFilter('Completed')">Completed</button>
+  </div>
+
+  <div *ngIf="filteredTasks.length === 0" class="empty-state">
+    <div class="empty-icon">📋</div>
+    <p class="empty-title">No tasks found</p>
+    <p class="empty-sub">Add a new task to get started</p>
+    <a routerLink="/tasks/new" class="btn-add-empty">+ Add Task</a>
+  </div>
+
+  <div class="task-cards">
+    <div *ngFor="let task of filteredTasks; trackBy: trackByTaskId" class="task-card" [class.completed-card]="task.status === 'Completed'">
+      <div class="task-left">
+        <button
+          class="check-btn"
+          [class.checked]="task.status === 'Completed'"
+          (click)="onToggle(task)"
+          [title]="task.status === 'Completed' ? 'Mark Pending' : 'Mark Complete'"
+        >
+          <span *ngIf="task.status === 'Completed'">✓</span>
+        </button>
+        <div class="task-info">
+          <p class="task-title" [class.strikethrough]="task.status === 'Completed'">{{ task.title }}</p>
+          <p class="task-desc" *ngIf="task.description">{{ task.description }}</p>
+          <div class="task-meta">
+            <span class="badge priority-{{ getPriorityLabel(task.priority).toLowerCase() }}">
+              {{ getPriorityLabel(task.priority) }}
+            </span>
+            <span class="badge category" *ngIf="task.category">{{ task.category }}</span>
+            <span class="due-date" *ngIf="task.dueDate" [class.overdue]="isOverdue(task)">
+              📅 {{ task.dueDate | date:'MMM d' }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="task-actions">
+        <a [routerLink]="['/tasks/edit', task.id]" [state]="{ task: task }" class="action-btn edit" title="Edit">✎</a>
+        <button class="action-btn delete" (click)="onDelete(task.id)" title="Delete">🗑</button>
+      </div>
+    </div>
+  </div>
+</div>

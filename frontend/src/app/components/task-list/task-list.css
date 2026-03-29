@@ -1,0 +1,119 @@
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.stat-card {
+  background: #1a1a35;
+  border-radius: 14px;
+  padding: 1.25rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.25rem 0;
+}
+.stat-value.pending { color: #fbbf24; }
+.stat-value.completed { color: #34d399; }
+.stat-value.high { color: #f87171; }
+.stat-label { color: #7070a0; font-size: 0.8rem; margin: 0; }
+
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.tab {
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: #7070a0;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tab:hover { border-color: #6c63ff; color: #a78bfa; }
+.tab.active { background: linear-gradient(135deg,#6c63ff,#a78bfa); color: #fff; border-color: transparent; }
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #1a1a35;
+  border-radius: 16px;
+  border: 1px dashed rgba(255,255,255,0.1);
+}
+.empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+.empty-title { color: #fff; font-size: 1.2rem; font-weight: 600; margin: 0 0 0.4rem; }
+.empty-sub { color: #7070a0; font-size: 0.9rem; margin: 0 0 1.5rem; }
+.btn-add-empty {
+  background: linear-gradient(135deg,#6c63ff,#a78bfa);
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.task-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+.task-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a35;
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: border-color 0.2s, transform 0.15s;
+}
+.task-card:hover { border-color: rgba(108,99,255,0.35); transform: translateX(2px); }
+.completed-card { opacity: 0.65; }
+
+.task-left { display: flex; align-items: center; gap: 1rem; flex: 1; }
+.check-btn {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid #6c63ff; background: transparent;
+  color: white; font-size: 0.75rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s;
+}
+.check-btn.checked { background: linear-gradient(135deg,#6c63ff,#a78bfa); border-color: transparent; }
+.check-btn:hover { transform: scale(1.1); }
+
+.task-info { flex: 1; min-width: 0; }
+.task-title {
+  color: #fff; font-size: 0.95rem; font-weight: 600;
+  margin: 0 0 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.task-title.strikethrough { text-decoration: line-through; color: #7070a0; }
+.task-desc {
+  color: #7070a0; font-size: 0.8rem; margin: 0 0 0.4rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.task-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.badge {
+  font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem;
+  border-radius: 20px; letter-spacing: 0.3px;
+}
+.priority-high { background: rgba(248,113,113,0.15); color: #f87171; }
+.priority-medium { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.priority-low { background: rgba(52,211,153,0.15); color: #34d399; }
+.category { background: rgba(108,99,255,0.15); color: #a78bfa; }
+.due-date { font-size: 0.75rem; color: #7070a0; }
+.due-date.overdue { color: #f87171; }
+
+.task-actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
+.action-btn {
+  width: 32px; height: 32px; border-radius: 8px;
+  border: none; cursor: pointer; font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; transition: all 0.2s;
+}
+.action-btn.edit { background: rgba(108,99,255,0.15); color: #a78bfa; }
+.action-btn.edit:hover { background: rgba(108,99,255,0.3); }
+.action-btn.delete { background: rgba(248,113,113,0.12); color: #f87171; }
+.action-btn.delete:hover { background: rgba(248,113,113,0.25); }

@@ -1,0 +1,23 @@
+# Requested exclusions
+backend.slnx
+.github/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Build outputs
+**/bin/
+**/obj/
+frontend/dist/
+frontend/.angular/
+frontend/node_modules/
+
+# Logs and temp
+*.log
+*.tmp
+*.swp
+
+# Local environment / secrets
+backend/appsettings.json
+frontend/src/environments/*.local.ts

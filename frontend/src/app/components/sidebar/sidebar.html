@@ -1,0 +1,45 @@
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-icon">{{ firstLetter$ | async }}</div>
+    <span class="logo-text">TaskFlow</span>
+  </div>
+
+  <nav class="nav-menu">
+    <p class="nav-label">MENU</p>
+    <a routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-item">
+      <span class="nav-icon">☰</span>
+      <span>My Tasks</span>
+    </a>
+    <a routerLink="/tasks/new" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-item">
+      <span class="nav-icon">＋</span>
+      <span>Add Task</span>
+    </a>
+  </nav>
+
+  <div class="nav-section">
+    <p class="nav-label">CATEGORIES</p>
+    <a routerLink="/tasks" [queryParams]="{}" class="category-item" routerLinkActive="active-category" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="dot all"></span><span>All</span>
+    </a>
+    <a routerLink="/tasks" [queryParams]="{ category: 'Work' }" class="category-item" routerLinkActive="active-category">
+      <span class="dot work"></span><span>Work</span>
+    </a>
+    <a routerLink="/tasks" [queryParams]="{ category: 'Personal' }" class="category-item" routerLinkActive="active-category">
+      <span class="dot personal"></span><span>Personal</span>
+    </a>
+    <a routerLink="/tasks" [queryParams]="{ category: 'Health' }" class="category-item" routerLinkActive="active-category">
+      <span class="dot health"></span><span>Health</span>
+    </a>
+    <a routerLink="/tasks" [queryParams]="{ category: 'Other' }" class="category-item" routerLinkActive="active-category">
+      <span class="dot other"></span><span>Other</span>
+    </a>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="avatar">{{ initials$ | async }}</div>
+    <div class="user-info">
+      <p class="user-name">{{ userName$ | async }}</p>
+      <button (click)="logout()" class="btn-logout" title="Logout">🚪 Logout</button>
+    </div>
+  </div>
+</aside>

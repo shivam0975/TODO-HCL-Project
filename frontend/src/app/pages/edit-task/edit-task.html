@@ -1,0 +1,20 @@
+<div class="edit-page">
+  <div *ngIf="fetchLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading task…</p>
+  </div>
+
+  <div *ngIf="fetchError" class="error-banner">
+    ⚠️ {{ fetchError }}
+  </div>
+
+  <app-task-form
+    *ngIf="task && !fetchLoading"
+    [editMode]="true"
+    [existingTask]="task"
+    [loading]="loading"
+    [successMsg]="successMsg"
+    [errorMsg]="errorMsg"
+    (submitForm)="onSubmit($event)"
+  />
+</div>

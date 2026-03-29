@@ -1,0 +1,78 @@
+<div class="form-card">
+  <h2 class="form-title">{{ editMode ? 'Edit Task' : 'New Task' }}</h2>
+  <p class="form-subtitle">{{ editMode ? 'Update task details below' : 'Fill in the details for your new task' }}</p>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label class="label">Task Title <span class="required">*</span></label>
+      <input
+        type="text"
+        formControlName="title"
+        class="input"
+        placeholder="e.g. Complete project documentation"
+      />
+      <p class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+        Title is required (max 200 chars)
+      </p>
+    </div>
+
+    <div class="field">
+      <label class="label">Description</label>
+      <textarea
+        formControlName="description"
+        class="input textarea"
+        placeholder="Add more details about this task..."
+        rows="3"
+      ></textarea>
+      <p class="error" *ngIf="form.get('description')?.touched && form.get('description')?.hasError('maxlength')">
+        Description cannot exceed 1000 characters
+      </p>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label class="label">Priority</label>
+        <select formControlName="priority" class="input select">
+          <option value="Low">🟢 Low</option>
+          <option value="Medium">🟡 Medium</option>
+          <option value="High">🔴 High</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label">Category</label>
+        <select formControlName="category" class="input select">
+          <option value="">— None —</option>
+          <option value="Work">Work</option>
+          <option value="Personal">Personal</option>
+          <option value="Health">Health</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field" *ngIf="editMode">
+        <label class="label">Status</label>
+        <select formControlName="status" class="input select">
+          <option value="Pending">⏳ Pending</option>
+          <option value="Completed">✅ Completed</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label">Due Date</label>
+        <input type="date" formControlName="dueDate" class="input" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <a routerLink="/tasks" class="btn-cancel">Cancel</a>
+      <button type="submit" class="btn-submit" [disabled]="form.invalid || loading">
+        <span *ngIf="loading" class="spinner"></span>
+        {{ loading ? 'Saving...' : (editMode ? 'Update Task' : 'Create Task') }}
+      </button>
+    </div>
+  </form>
+
+  <div class="toast success" *ngIf="successMsg">✓ {{ successMsg }}</div>
+  <div class="toast error-toast" *ngIf="errorMsg">✕ {{ errorMsg }}</div>
+</div>

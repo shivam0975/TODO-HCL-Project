@@ -1,0 +1,17 @@
+<div class="home-page">
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner-large"></div>
+    <p>Loading tasks…</p>
+  </div>
+
+  <div *ngIf="error && !loading" class="error-banner">
+    ⚠️ {{ error }}
+  </div>
+
+  <app-task-list
+    *ngIf="!loading"
+    [tasks]="visibleTasks"
+    (toggleStatus)="onToggleStatus($event)"
+    (deleteTask)="onDelete($event)"
+  />
+</div>
