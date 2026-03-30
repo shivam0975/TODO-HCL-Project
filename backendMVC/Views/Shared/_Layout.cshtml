@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] – Task Manager</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+        body { background: #f0f2f5; }
+        .navbar-brand { font-weight: 700; letter-spacing: 1px; }
+        .badge-pending   { background: #ffc107; color: #333; }
+        .badge-completed { background: #198754; color: #fff; }
+        .task-card { transition: transform .15s; }
+        .task-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/Tasks">
+                <i class="bi bi-cpu-fill me-2"></i> HCL Project
+            </a>
+            @if (Context.Session.GetString("JwtToken") != null)
+            {
+                <div class="d-flex align-items-center gap-3">
+                    <span class="text-white">
+                        <i class="bi bi-person-circle me-1"></i>
+                        @Context.Session.GetString("UserName")
+                    </span>
+                    <a href="/Tasks/Logout" class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-box-arrow-right me-1"></i>Logout
+                    </a>
+                </div>
+            }
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
